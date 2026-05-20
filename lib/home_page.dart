@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'list_page.dart';
+import 'login_page.dart';
 
 class HomePage extends StatelessWidget {
   final String username;
 
   HomePage({required this.username});
 
-  Widget _buildMenuCard(BuildContext context, String title, String description, IconData icon) {
+  Widget _buildMenuCard(
+    BuildContext context,
+    String title,
+    String description,
+    IconData icon,
+  ) {
     return Card(
       color: Color(0xFF2C2C2C),
       margin: EdgeInsets.only(bottom: 16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
-        
+
         onTap: () {
-          
           String endpoint = '';
           if (title == 'NEWS')
             endpoint = 'articles';
@@ -36,7 +41,6 @@ class HomePage extends StatelessWidget {
           padding: EdgeInsets.all(12),
           child: Row(
             children: [
-              
               Container(
                 width: 100,
                 height: 100,
@@ -47,7 +51,7 @@ class HomePage extends StatelessWidget {
                 child: Icon(icon, size: 50, color: Colors.grey[500]),
               ),
               SizedBox(width: 16),
-             
+
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,6 +93,19 @@ class HomePage extends StatelessWidget {
         ),
         backgroundColor: Color(0xFF2C2C2C),
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout, color: Colors.white),
+            tooltip: 'Logout',
+            onPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+                (route) => false,
+              );
+            },
+          ),
+        ],
       ),
       body: ListView(
         padding: EdgeInsets.all(16),
